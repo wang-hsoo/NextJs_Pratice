@@ -1,17 +1,27 @@
-import { useState } from "react";
-import NavBar from "../components/NavBar";
+import { useEffect, useState } from "react";
+import Seo from "../components/Seo";
+
+const API_KEY = "d715ceec7c486156939aed65c955d710";
 
 export default function Home(){
-    const [counter, setCounter] = useState(0);
+    const [movies, setMovies] = useState();
+
+    useEffect(() => {
+        (async () => {
+            const {results} = await( await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)).json();
+            setMovies(results);
+        })();
+    },[])
 
     return (
         <div>
-            <h1>Hello {counter}</h1>
-            <style jsx global>{`
-                a{
-                    color:white;
-                }
-            `}</style>
+            <Seo title="Home" />
+            {!movies && <h4>Loading...</h4>}
+            {movies?.map((movie) => (
+                <div key ={movie.id}>
+                    <h4>{movie.original_title}</h4>
+                </div>
+            ))}
         </div>
     )
 }
