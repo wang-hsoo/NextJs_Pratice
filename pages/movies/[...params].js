@@ -5,7 +5,6 @@ import Seo from "../../components/Seo";
 export default function Detail({params, results}){
     const router = useRouter();
     const [title, id] = params || [];
-    console.log(results);
     
     return (
         <div className="container">
@@ -29,6 +28,7 @@ export default function Detail({params, results}){
                 .container{
                     display: flex;
                     flex-direction: column;
+                    padding: 15px;
                 }
                 h4{
                     font-size: 24px;
@@ -50,6 +50,8 @@ export default function Detail({params, results}){
                 }
                 .overview{
                     text-align: justify;
+                    
+                    font-size: 15px
                 }
                 a{
                     font-size: 20px;
